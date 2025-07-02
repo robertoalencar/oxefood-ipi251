@@ -8,8 +8,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
+import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
 import lombok.Getter;
@@ -34,11 +36,13 @@ public abstract class EntidadeAuditavel extends EntidadeNegocio {
     private LocalDate dataUltimaModificacao;
 
     @JsonIgnore
-    @Column
-    private Long criadoPor; // Id do usuário que o criou
+    @ManyToOne
+    @JoinColumn
+    private Usuario criadoPor; // Id do usuário que o criou
 
     @JsonIgnore
-    @Column
-    private Long ultimaModificacaoPor; // Id do usuário que fez a última alteração
+    @ManyToOne
+    @JoinColumn
+    private Usuario ultimaModificacaoPor; // Id do usuário que fez a última alteração
 
 }
